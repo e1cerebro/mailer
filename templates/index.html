@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+</head>
+<body>
+     <div class="container">
+
+  <h2>Mailer Wizard</h2>
+     <hr/>
+
+  <form method="post">
+        {% csrf_token %}
+
+
+      <div class="col-md-8">
+              <div class="form-group">
+                <label for="comment">To:</label>
+                <textarea class="form-control" rows="5" id="to" name="to">{{ to }}</textarea>
+              </div>
+
+              <div class="form-group">
+                  <label for="email">Subject:</label>
+                  <input type="text" class="form-control" id="subject" placeholder="Enter Subject" name="subject" value="{{ subject }}">
+                </div>
+
+              <div class="form-group">
+                <textarea class="textarea" name="message">{{ message }}</textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+
+
+              <div>
+                    <br/>
+                {% if status %}
+                    <div class="alert alert-info">
+                      <strong>Response!</strong> {{ status }}
+                    </div>
+                {% endif %}
+              </div>
+                <br/>
+                {% if status %}
+                    <div class="alert alert-info">
+                      <strong>Response!</strong> {{ status }}
+                    </div>
+
+                {% endif %}
+
+      </div>
+      <div class="col-md-4">
+          <h4>Authentication</h4>
+              <div class="form-group">
+                <label for="comment">Usernames:</label>
+                <textarea class="form-control" rows="5" id="usernames" name="usernames" placeholder="Enter set of colon(;) separated email addresses">{{ usernames }}</textarea>
+              </div>
+
+             <div class="form-group">
+                <label for="comment">Passwords:</label>
+                <textarea class="form-control" rows="5" id="passwords" name="passwords">{{ passwords }}</textarea>
+              </div>
+      </div>
+
+
+  </form>
+
+</div>
+
+<script>
+    tinymce.init({
+        selector: '.textarea',
+        height: 500,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+        content_css: [
+            '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+            '//www.tinymce.com/css/codepen.min.css'
+        ]
+    });
+</script>
+</body>
+</html>
+
